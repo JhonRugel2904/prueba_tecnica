@@ -3,6 +3,7 @@ const cors = require('cors');
 const db = require('./config/db'); 
 require('dotenv').config();
 const productRoutes = require('./routes/productRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 
 // Rutas
 app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes);
 
 // Conexion a la DB
 db.query('SELECT NOW()', (err) => {
