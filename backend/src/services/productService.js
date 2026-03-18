@@ -8,6 +8,7 @@ const getProducts = async () => {
         return products.map(p => {
             const offerPrice = p.price;
             const discount = p.discountPercentage;
+            // Calculo del precio original convirtiendo a decimal el % de descuento
             const originalPrice = offerPrice / (1 - (discount / 100));
 
             return {
@@ -16,7 +17,7 @@ const getProducts = async () => {
                 title: p.title,
                 price: offerPrice,
                 discountPercentage: discount,
-                totalPrice: parseFloat(originalPrice.toFixed(2))
+                totalPrice: parseFloat(originalPrice.toFixed(2)) // Uso de solo 2 decimales 
             };
         });
     } catch (error) {
