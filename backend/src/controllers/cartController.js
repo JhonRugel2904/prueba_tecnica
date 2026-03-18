@@ -47,4 +47,28 @@ const getCart = async (req, res) => {
     }
 };
 
-module.exports = { addToCart, getCart };
+// Eliminar un item del carrito
+const removeFromCart = async (req, res) => {
+    try {
+        const { id } = req.params; 
+
+        const deletedItem = await cartService.removeItemFromCart(id);
+
+        if (!deletedItem) {
+            return res.status(404).json({ message: 'El producto no existe en el carrito' });
+        }
+
+        res.status(200).json({
+            message: 'Producto eliminado del carrito correctamente',
+            item_eliminado: deletedItem
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+module.exports = { 
+    addToCart, 
+    getCart, 
+    removeFromCart 
+};

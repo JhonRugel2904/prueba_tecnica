@@ -48,4 +48,15 @@ const getCartContents = async (userId) => {
     return res.rows;
 };
 
-module.exports = { addProductToCart, getCartContents };
+// Elimina un producto especifico del carrito
+const removeItemFromCart = async (idDetalle) => {
+    const query = 'DELETE FROM order_items WHERE id_detalle = $1 RETURNING *';
+    const res = await db.query(query, [idDetalle]);
+    return res.rows[0];
+};
+
+module.exports = { 
+    addProductToCart, 
+    getCartContents,
+    removeItemFromCart 
+};
