@@ -1,8 +1,8 @@
 const db = require('../config/db');
 
 /**
- * Logica de negocio para el carrito de compras
- * Se encarga de implementar la creacion de forma automatica de ordenes en caso el usuario no tenga activo
+ * Gestiona la insercion de productos en el carrito
+ * En caso de no existir orden activa, la crea
  */
 const addProductToCart = async (userId, product) => {
     //Verificar si existe el carrito
@@ -32,4 +32,20 @@ const addProductToCart = async (userId, product) => {
     return itemRes.rows[0];
 };
 
-module.exports = { addProductToCart };
+/**
+ * Obtiene el detalle de todos los productos en el carrito de un usuario.
+ * Realiza un JOIN para asegurar que los items pertenecen a la orden del usuario.
+ */
+const getCartContents = async (userId) => {
+    const query = `
+        SELECT oi.id_detalle, oi.id_producto, oi.sku, oi.precio
+        FROM "order" o
+        JOIN order_items oi ON o.id_carrito = oi.id_carrito
+        WHERE o.id_usuario = $1
+    `;
+    
+    const res = await db.query(query, [userId]);
+    return res.rows;
+};
+
+module.exports = { addProductToCart, getCartContents };
