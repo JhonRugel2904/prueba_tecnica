@@ -1,6 +1,6 @@
 # Documentacion de requerimientos y como ejecutar en un entorno local
 
-# Backend - API de E-Commerce y Carrito
+# Backend 
 
 Este es el servidor Backend de la aplicación, construido con Node.js y Express. Se encarga de exponer los endpoints (API REST) para gestionar el carrito de compras y persistir de forma segura los datos transaccionales en una base de datos PostgreSQL.
 
@@ -20,38 +20,35 @@ Sigue estos pasos para levantar el entorno de desarrollo en tu máquina:
 
 ### 1. Clonar e Instalar
 Posiciónate en la carpeta del backend e instala los paquetes necesarios:
-\`\`\`bash
+```bash
+git clone <url-del-repositorio>
+```
+```bash
+cd proyecto_apis/backend
+```
+Instalar depdencias necesarias
+```bash
 npm install
-\`\`\`
+```
 
 ### 2. Variables de Entorno
 Crea un archivo llamado `.env` en la raíz de esta carpeta (puedes guiarte de el `.env.example`) y configura tu conexión a PostgreSQL y el puerto:
-\`\`\`env
-PORT=3000
-DB_USER=postgres
-DB_PASSWORD=tu_contraseña
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=nombre_de_tu_bd
-EXTERNAL_API_URL=https://dummyjson.com/products
-\`\`\`
 
 ### 3. Base de Datos
-Asegúrate de ejecutar los scripts SQL en tu gestor (ej. PgAdmin) para crear las tablas necesarias (`usuarios`, `orders`, `order_items`) antes de iniciar el servidor. Es necesario tener al menos un usuario registrado para asignar las compras del carrito.
-Copia el script que se encuentra en el archivo (`init sql` ya incluye el usuario)
+Copia el script que se encuentra en el archivo (`init sql` ,ya incluye el usuario)
 
 ### 4. Iniciar el Servidor
-Para iniciar el servidor en modo desarrollo (con hot-reloading de Nodemon), ejecuta:
-\`\`\`bash
+Para iniciar el servidor ejecuta:
+```bash
 npm run dev
-\`\`\`
+```
 El servidor indicará en la consola que está corriendo y conectado a la base de datos (por defecto en `http://localhost:3000`).
 
 ---
 
 # Frontend - Catálogo y Carrito de Compras
 
-Esta es la interfaz de usuario (SPA) construida con React para el reto técnico de E-Commerce. Se encarga de mostrar un catálogo dinámico consumiendo una API externa (`dummyjson`) y gestionar el estado del carrito de compras comunicándose con nuestro propio Backend.
+Esta es la interfaz de usuario construida con React para el reto técnico de E-Commerce. Se encarga de mostrar un catálogo dinámico consumiendo una API externa (`dummyjson`) y gestionar el estado del carrito de compras comunicándose con nuestro propio Backend.
 
 ## Tecnologías y Dependencias
 
@@ -72,16 +69,18 @@ Sigue estos pasos para levantar el entorno de desarrollo en tu máquina:
 
 ### 1. Clonar e Instalar
 Posiciónate en la carpeta del frontend e instala los módulos de Node:
-\`\`\`bash
+```bash
+cd proyecto_apis/frontend
+```
+```bash
 npm install
-\`\`\`
-
+```
 ### 2. Configuración (Opcional)
 Si el Backend está corriendo en un puerto distinto al `3000`, asegúrate de actualizar la URL base en la configuración de Axios (`src/api/api.js` o donde lo tengas centralizado). Por defecto apunta a `http://localhost:3000/api`.
 
 ### 3. Iniciar el Servidor de Desarrollo
 Ejecuta el siguiente comando para levantar la aplicación usando Vite:
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 La aplicación se abrirá en tu navegador (generalmente en `http://localhost:5173`).
