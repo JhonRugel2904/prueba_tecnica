@@ -12,6 +12,8 @@ const getProducts = async () => {
             const originalPrice = offerPrice / (1 - (discount / 100));
 
             return {
+                id: p.id,
+                sku: p.sku,
                 thumbnail: p.thumbnail,
                 brand: p.brand,
                 title: p.title,
